@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qr code generator</title>
+</head>
+<style>
+    header h1{
+        text-align: center;
+    }
+    hr{
+     width: 60%;
+    }
+    .qrcode{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-bottom: 1rem;
+        padding-top: 2rem;
+    }
+    .input{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 1rem;
+        flex-direction: column;
+        margin-left:5% ;
+    }
+    .input input{
+        padding: 1rem 4rem 1rem 4rem;
+        font-size: 1.5rem;
+    }
+    .input button{
+        margin-top: 2rem;
+        padding: 1rem 4rem 1rem 4rem;
+        font-size: 1.5rem;
+        border-radius: 1rem;
+        background-color: darksalmon;
+    }
+    .scan{
+        text-align: center;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 2rem;
+        padding-top: 1rem;
+    }
+</style>
+<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+    </script>
+<body>
+    <header>
+        <h1>Qr Code Generator</h1>
+        <hr>
+    </header>
+    <div class="qrcode">
+    </div>
+    <div class="scan"></div>
+    <div class="input">
+        <input type="text" placeholder="ENTER THE URL">
+        <button>Generate QR Code</button>
+    </div>
+    <script>
+        let url=document.querySelector("input");
+        let qrcodeContainer=document.querySelector(".qrcode");
+        let but=document.querySelector("button");
+        let qrCode = new QRCode(qrcodeContainer, {
+            text: "https://example.com",
+            width: 256,
+            height: 256,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+        });
+        but.addEventListener("click",()=>{
+            if(url.value===""||url.value.trim()===" ")
+            {
+                alert("enter the url");
+            }else{
+            qrCode.makeCode(url.value);
+            }
+        });
+        let scan=document.querySelector(".scan");
+        scan.innerHTML="SCAN ME"
+    </script>
+</body>
+</html>
